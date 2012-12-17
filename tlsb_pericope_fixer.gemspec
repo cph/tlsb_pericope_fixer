@@ -13,6 +13,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = ""
   
   gem.add_dependency "pericope"
+  gem.add_dependency "nokogiri"
   
   gem.add_development_dependency "rails", "~> 3.2.8"
   gem.add_development_dependency "turn"
