@@ -22,4 +22,20 @@ class ParsingTest < ActiveSupport::TestCase
   end
   
   
+  test "it should ensure that every .note-id has the right href" do
+    file = TLSB::XmlFile.new File.expand_path("./test/data/Genesis-studynotes.xml")
+    assert_equal 250, file.document.css(".note-id").count(&method(:where_note_id_has_the_wrong_href))
+    file.ensure_note_id_accuracy!(book: "Genesis")
+    assert_equal 0, file.document.css(".note-id").count(&method(:where_note_id_has_the_wrong_href))
+  end
+  
+  
+  def where_note_id_has_the_wrong_href(note_id)
+    assumed_book = "Genesis"
+    pericope = TLSB.parse_reference(note_id.text, book: assumed_book)
+    expected_href = TLSB.format_as_id(pericope)
+    note_id["href"] != expected_href
+  end
+  
+  
 end

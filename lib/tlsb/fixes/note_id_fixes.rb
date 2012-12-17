@@ -17,12 +17,19 @@ module TLSB
             next
           end
           
-          reference = strong_tag.text
-          book_and_reference = "#{book_name} #{reference}"
-          pericope = Pericope.new(book_and_reference)
-          
-          id = pericope.to_a.first.to_s.rjust(8, "0")
-          strong_tag << "<a class=\"note-id\" href=\"n#{id}\">#{reference}</a>"
+          pericope = TLSB.parse_reference(strong_tag.text, options)
+          id = TLSB.format_as_id(pericope)
+          strong_tag << "<a class=\"note-id\" href=\"#{id}\">#{strong_tag.text}</a>"
+        end
+      end
+      
+      def ensure_note_id_accuracy!(options={})
+        book_name = options[:book]
+        raise ArgumentError("You must say what book this is for") unless book_name
+        
+        document.css('.note-id').each do |note_id|
+          pericope = TLSB.parse_reference(note_id.text, book: book_name)
+          note_id["href"] = TLSB.format_as_id(pericope)
         end
       end
       
