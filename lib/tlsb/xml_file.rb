@@ -1,7 +1,9 @@
 require 'nokogiri'
+require 'tlsb/fixes/note_id_fixes'
 
 module TLSB
   class XmlFile
+    include Fixes::NoteIdFixes
     
     
     def initialize(file_path)

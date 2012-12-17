@@ -1,6 +1,6 @@
 require "tlsb/version"
 require "tlsb/xml_file"
-require "pericope"
+require "tlsb/pericope_extensions"
 
 module TLSB
   # Your code goes here...

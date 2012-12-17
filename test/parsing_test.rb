@@ -12,4 +12,14 @@ class ParsingTest < ActiveSupport::TestCase
   end
   
   
+  test "it should ensure that every note has a .note-id that links back to its original context" do
+    file = TLSB::XmlFile.new File.expand_path("./test/data/Genesis-studynotes.xml")
+    assert_equal 35, file.document.css("note").count { |note| note.css(".note-id").empty? }
+    file.ensure_note_id_existence!(book: "Genesis")
+    
+    # note: there's still 1 bad note because it doesn't have a reference part at all
+    assert_equal 1, file.document.css("note").count { |note| note.css(".note-id").empty? }
+  end
+  
+  
 end
