@@ -30,10 +30,27 @@ class ParsingTest < ActiveSupport::TestCase
   end
   
   
+  test "it should ensure that every note tag's start and end attributes match its .note-id's href" do
+    file = TLSB::XmlFile.new File.expand_path("./test/data/Genesis-studynotes.xml")
+    assert_equal 5, file.document.css("note").count(&method(:where_note_does_not_match_note_id))
+    file.ensure_note_matches_note_id!(book: "Genesis")
+    assert_equal 0, file.document.css("note").count(&method(:where_note_does_not_match_note_id))
+  end
+  
+  
   def where_note_id_has_the_wrong_href(note_id)
     assumed_book = "Genesis"
     pericope = TLSB.parse_reference(note_id.text, book: assumed_book)
     expected_href = TLSB.format_as_id(pericope)
+    note_id["href"] != expected_href
+  end
+  
+  def where_note_does_not_match_note_id(note)
+    note_start = note["start"]
+    note_end = note["end"]
+    expected_href = [note_start, note_end].uniq.join("-")
+    note_id = note.css('.note-id')[0]
+    return false unless note_id
     note_id["href"] != expected_href
   end
   

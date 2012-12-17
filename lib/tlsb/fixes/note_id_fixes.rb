@@ -33,6 +33,21 @@ module TLSB
         end
       end
       
+      def ensure_note_matches_note_id!(options={})
+        book_name = options[:book]
+        raise ArgumentError("You must say what book this is for") unless book_name
+        
+        document.css('note').each do |note|
+          note_id = note.css('.note-id')[0]
+          next unless note_id
+          
+          note_start, note_end = note_id["href"].split("-")
+          note_end ||= note_start
+          note["start"] = note_start
+          note["end"] = note_end
+        end
+      end
+      
     end
   end
 end
