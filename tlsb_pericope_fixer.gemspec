@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Robert Lail"]
   gem.email         = ["robert.lail@cph.org"]
   gem.description   = %q{Looks for Bible reference links in TLSB XML, parses the reference, and writes the correct link}
-  gem.summary       = %q{A script to fix bible references in the TLSB XML }
+  gem.summary       = %q{A script to fix bible references in the TLSB XML}
   gem.homepage      = ""
   
   gem.add_dependency "pericope"
