@@ -1,7 +1,7 @@
-require "tlsb_pericope_fixer/version"
+require "tlsb/version"
 require "pericope"
 require "nokogiri"
 
-module TlsbPericopeFixer
+module TLSB
   # Your code goes here...
 end

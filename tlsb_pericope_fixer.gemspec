@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'tlsb_pericope_fixer/version'
+require 'tlsb/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "tlsb_pericope_fixer"
-  gem.version       = TlsbPericopeFixer::VERSION
+  gem.version       = TLSB::VERSION
   gem.authors       = ["Robert Lail"]
   gem.email         = ["robert.lail@cph.org"]
   gem.description   = %q{Looks for Bible reference links in TLSB XML, parses the reference, and writes the correct link}
