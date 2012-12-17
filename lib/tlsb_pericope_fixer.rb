@@ -1,6 +1,6 @@
 require "tlsb/version"
+require "tlsb/xml_file"
 require "pericope"
-require "nokogiri"
 
 module TLSB
   # Your code goes here...
